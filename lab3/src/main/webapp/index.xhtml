@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>lab 3</title>
+</h:head>
+<h:body>
+    <div id="header" style="display:block; text-align:center">
+        <h1 id="name">Мыц Степан Евгеньевич</h1>
+        <h2>P32141, var: 14858 | ITMO, Saint-Petersburg</h2>
+    </div>
+
+    <div id="time" style="display: block; text-align: center; margin-top: 10%;">
+        <h:form id="form">
+            <h:outputText id="txt_count" value="#{clockView.dateTime}" />
+            <p:poll interval="9" listener="#{clockView.init}"  update="txt_count" />
+        </h:form>
+    </div>
+
+    <div style="display: block; text-align: center; margin-top: 10%;">
+        <h:button  value="Перейти к основной странице" outcome="toMainPage"></h:button>
+    </div>
+
+
+<!--    <div class="card">-->
+<!--        <h:form>-->
+
+<!--            <h5>Server</h5>-->
+<!--            <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" value="#{clockView.dateTime}"/>-->
+
+<!--        </h:form>-->
+<!--    </div>-->
+
+</h:body>
+</html>
+

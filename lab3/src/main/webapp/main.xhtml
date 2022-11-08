@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>lab 3</title>
+    <link rel="stylesheet" type="text/css" href="resources/styles/jsx.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/styles/mainstyle.css"/>
+    <script type="text/javascript" src="resources/javascript/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="resources/javascript/http_jsxgraph.org_distrib_jsxgraphcore.js"></script>
+    <script type="text/javascript" src="resources/javascript/onsubmit.js"></script>
+    <script type="text/javascript" src="resources/javascript/checkboxes.js"></script>
+    <script type="text/javascript" src="resources/javascript/textinput.js"></script>
+    <script type="text/javascript" src="resources/javascript/graph.js"></script>
+
+</h:head>
+<h:body>
+    <div id="header" style="display:block; text-align:center">
+        <h1 id="name">Мыц Степан Евгеньевич</h1>
+        <h2>P32141, var: 14858 | ITMO, Saint-Petersburg</h2>
+    </div>
+
+    <div style="display: block; text-align: center; margin-top: 1%; margin-bottom: 2%">
+        <h:button value="Перейти к стартовой странице" outcome="toStartPage"/>
+    </div>
+    <div id="jxgbox" class="graph" style="height: 300px; width: 300px"></div>
+
+    <h:form id="form" style="width: 25%;">
+        <p:remoteCommand name="rc" action="#{remoteCommandView.execute}" oncomplete="drawLastTablePoint();" update="table"/>
+
+        <div class="x-value">
+            <p:outputLabel value="Значение X"/><br/><br/>
+            <p:selectBooleanCheckbox value="#{xBean.value1}" itemLabel="-5" id="check1_1"/>
+            <p:selectBooleanCheckbox value="#{xBean.value2}" itemLabel="-4" id="check1_2"/>
+            <p:selectBooleanCheckbox value="#{xBean.value3}" itemLabel="-3" id="check1_3"/>
+            <p:selectBooleanCheckbox value="#{xBean.value4}" itemLabel="-2" id="check1_4"/>
+            <p:selectBooleanCheckbox value="#{xBean.value5}" itemLabel="-1" id="check1_5"/>
+            <p:selectBooleanCheckbox value="#{xBean.value6}" itemLabel="0" id="check1_6"/>
+            <p:selectBooleanCheckbox value="#{xBean.value7}" itemLabel="1" id="check1_7"/>
+        </div>
+
+        <div class="y-value" style="margin-top: 9%">
+            <p:outputLabel value="Значение Y"/><br/><br/>
+            <p:inputText value="#{yBean.value}" id="text_input">
+<!--                <f:validateRequired/>-->
+            </p:inputText>
+        </div>
+
+        <div class="r-value" style="margin-top: 9%">
+            <p:outputLabel value="Значение R"/><br/><br/>
+            <p:selectBooleanCheckbox value="#{rBean.value1}" itemLabel="1" id="check2_1"/>
+            <p:selectBooleanCheckbox value="#{rBean.value2}" itemLabel="1.5" id="check2_2"/>
+            <p:selectBooleanCheckbox value="#{rBean.value3}" itemLabel="2" id="check2_3"/>
+            <p:selectBooleanCheckbox value="#{rBean.value4}" itemLabel="2.5" id="check2_4"/>
+            <p:selectBooleanCheckbox value="#{rBean.value5}" itemLabel="3" id="check2_5"/>
+        </div>
+
+        <h:commandButton onclick="return onsubmit();" action="#{dataTable.save()}" style="margin-top: 10%" value="Submit">
+            <f:ajax onevent="function (data) { if (data.status === 'success') {
+                            drawLastTablePoint();
+    }}" execute="form" render="table"/>
+        </h:commandButton>
+    </h:form>
+
+    <div class="table">
+
+        <h:dataTable id="table" value="#{dataTable.hits}" var="h">
+            <h:column><f:facet name="header">X</f:facet>#{h.x}</h:column>
+            <h:column><f:facet name="header">Y</f:facet>#{h.y}</h:column>
+            <h:column><f:facet name="header">R</f:facet>#{h.r}</h:column>
+            <h:column><f:facet name="header">hit result</f:facet>#{h.hitted}</h:column>
+        </h:dataTable>
+
+    </div>
+
+</h:body>
+</html>
+
