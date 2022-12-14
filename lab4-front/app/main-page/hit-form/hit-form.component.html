@@ -1,0 +1,34 @@
+<div class="text-center surface-card p-4 shadow-2 border-round lg:w-27rem inline-block mb-7">
+  <div
+    style="text-align: center;margin-top: 50px; font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol; font-size: 14px;">
+    <form [formGroup]="form">
+      <div class="text-900 text-3xl font-medium mb-5">Введите координаты</div>
+
+      <div class="field">
+        <label for="username1" class="block text-1xl"> Значение Х</label>
+        <input formControlName="x" id="username1" type="number"
+               aria-describedby="username1-help" pInputText/>
+        <small id="username1-help" class="block text-1xl">(от -5 до 5)</small>
+      </div>
+
+      <div class="field mt-5">
+        <label for="username2" class="block">Значение Y</label>
+        <input formControlName="y" id="username2" type="number"
+               aria-describedby="username2-help" pInputText/>
+        <small id="username2-help" class="block text-1">(от -5 до 3)</small>
+      </div>
+      <div class="field mt-5">
+        <label for="username3" class="block">Значение R</label>
+        <input formControlName="r" id="username3" (input)="onChangeR($event)"
+               type="number" aria-describedby="username3-help" pInputText/>
+        <small id="username3-help" class="block">(от 0 до 5)</small>
+      </div>
+      <div>
+        <button [disabled]="form.invalid" class="mt-5 w-13rem" type="submit" (click)="requestHit()" pButton pRipple label="Проверить"
+                icon="pi pi-user"></button>
+      </div>
+      <button class="mt-5 w-13rem" type="submit" (click)="deleteHits()" pButton pRipple label="Удалить все точки"
+              icon="pi pi-user"></button>
+    </form>
+  </div>
+</div>
